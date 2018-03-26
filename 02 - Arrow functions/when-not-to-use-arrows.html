@@ -13,6 +13,7 @@
 
 <script>
   // When you really need `this`
+  // would want to use function() as opposed to () => as this will refer to the window when you use this
   const button = document.querySelector('#pushy');
   button.addEventListener('click', function() {
     console.log(this);
@@ -20,6 +21,7 @@
   });
 
   // When you need a method to bind to an object
+  // same situation as above, use function method as opposed to () =>
   const person = {
     points: 23,
     score() {
@@ -36,14 +38,19 @@
     }
   }
 
+  //creates a new object
+
   const beemer = new Car('bmw', 'blue');
   const subie = new Car('Subaru', 'white');
 
+   //even after the cars have been created, you can still pass methods to it
+   //summarize was a function he made
   Car.prototype.summarize = function() {
      return `This car is a ${this.make} in the colour ${this.colour}`;
   };
 
   // When you need arguments object
+  //arguments will only work with regular functions
   const orderChildren = function() {
     const children = Array.from(arguments);
     return children.map((child, i) => {

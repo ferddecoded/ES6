@@ -33,15 +33,71 @@
 
   // Select all the list items on the page and convert to array
 
+  const list = document.querySelector("ul");
+  console.log(list);
+  const items = [...list.querySelectorAll("[data-time]")];
+  console.log(items);
+
   // Filter for only the elements that contain the word 'flexbox'
+   const flexbox = items
+      .filter((item) => {
+         return item.textContent.includes("Flexbox");
+      })
+
 
   // map down to a list of time strings
 
+      .map((flex) => {
+         return flex.attributes[0].nodeValue
+      })
+
   // map to an array of seconds
+      .map((seconds) => {
+         const [min, sec] = seconds.split(":");
+         const minuteInSec = parseInt(min);
+         const second = parseInt(sec);
+         const totalSecs = (minuteInSec * 60) + second;
+
+         return totalSecs;
+
+      })
+
+      console.log(flexbox);
+
+
+
 
   // reduce to get total
+  const reduce = flexbox.reduce((total, next) => {
+     return total + next
+  }, 0)
+
+  console.log(reduce)
 
   // 🔥 This can also be done in a single .reduce(), but we're practicing arrow functions here, so chain them!
+
+  const reduced = items
+            .filter((item) => {
+               return item.textContent.includes("Flexbox");
+            })
+            .map((flex) => {
+               return flex.attributes[0].nodeValue
+            })
+            .map((seconds) => {
+               const [min, sec] = seconds.split(":");
+               const minuteInSec = parseInt(min);
+               const second = parseInt(sec);
+               const totalSecs = (minuteInSec * 60) + second;
+
+               return totalSecs;
+
+            })
+            .reduce((total, next) => {
+               return total + next
+            }, 0)
+
+   console.log(reduced)
+
 
 </script>
 </body>
